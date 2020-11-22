@@ -37,7 +37,8 @@ io.on('connection', (socket) => {
         const {id_user, id_room, message} = data;
         socket.to(id_room).emit('new_msg', {
             message,
-            id_user
+            id_user,
+            id_room
         })
     })
 
