@@ -2,6 +2,7 @@ const { check, validationResult} = require("express-validator");
 const router = require('express').Router();
 const ProtectedRoutes = require('../middlewares/protectedRoutes');
 const Message = require("../models/Message");
+const User = require('../models/User');
 
 router.post("/createMessage", 
     ProtectedRoutes,
@@ -57,7 +58,25 @@ router.delete("/deleteMessage", ProtectedRoutes, (req, res) => {
 
 router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
-    Message.find({id_room: req.body.id_room})
+    let list = {};
+
+    let messages = Message.find({id_room: req.body.id_room});
+
+    if (!message) return res.status(400).json({message: "There is no messages in this room"});
+
+    messages.forEach(element => {
+        let user = User.find({id_user: element.id_user});
+        list.append({
+            id_user: element.id_user,
+            message: element.message,
+            username: user.username,
+            avatar: user.avatar
+        })
+    });
+
+    res.status(200).json({list});
+
+    /*Message.find({id_room: req.body.id_roomn})
     .exec((err, messages) => {
         if (err) {
             return res.status(400).json({
@@ -68,7 +87,7 @@ router.post("/getMessages", ProtectedRoutes, (req, res) => {
         res.status(200).json({
             messages: messages
         })
-    })
+    })*/
 });
 
 module.exports = router;
