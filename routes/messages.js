@@ -60,7 +60,7 @@ router.delete("/deleteMessage", ProtectedRoutes, (req, res) => {
 
 router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
-    Message.find({id_room: req.body.id_roomn})
+    Message.find({id_room: req.body.id_room})
     .exec((err, messages) => {
         if (err) {
             return res.status(400).json({
