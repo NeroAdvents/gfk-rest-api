@@ -58,17 +58,12 @@ router.delete("/deleteMessage", ProtectedRoutes, (req, res) => {
 
 router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
-    let list = {};
+    Message.find({id_room: req.body.id_room})
+    .exec( async (err, messages) => {
+        if (err) return res.status(400).json({message: "Error while getting messages", error: err});
 
-    let messages = Message.find({id_room: req.body.id_room});
-
-    if (!messages) return res.status(400).json({message: "There is no messages in this room"});
-
-    console.log(messages);
-    
-    for (let i = 0; i < messages.length; i++) {
-        console.log(messages[i]);
-    }
+        res.status(200).json({messages});
+    })
 
     /*messages.forEach(element => {
         let user = User.find({id_user: element.id_user});
@@ -80,7 +75,6 @@ router.post("/getMessages", ProtectedRoutes, (req, res) => {
         })
     });*/
 
-    res.status(200).json({messages});
 
     /*Message.find({id_room: req.body.id_roomn})
     .exec((err, messages) => {
