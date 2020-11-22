@@ -54,7 +54,7 @@ router.delete("/deleteRoom", ProtectedRoutes, (req, res) => {
     })
 })
 
-router.get("/getRooms", ProtectedRoutes, (req, res) => {
+router.post("/getRooms", ProtectedRoutes, (req, res) => {
     Room.find({})
     .exec((err, rooms) => {
         if (err) return res.status(400).json({message: 'There is an error getting all rooms', error: err});
