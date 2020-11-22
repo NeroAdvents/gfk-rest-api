@@ -14,7 +14,7 @@ var io = require('socket.io')(http);
 
 const upload = require('./middlewares/upload');
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 InitiateMongoServer();
 
