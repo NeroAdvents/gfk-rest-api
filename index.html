@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>    
+</head>
+<body>
+<button id="add_message" onclick="sendMsg()" >click me</button>
+<button id="delete_message" onclick="deleteMsg()">delete me</button>
+</body>
+<script src="/scripts/socket.io/client-dist/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('connect', function () {
+        socket.emit('join_room', 1);
+    });
+
+    sendMsg = () => {
+        socket.emit('new_msg', {
+            id_room: 1,
+            id_user: 2,
+            message: "hello world"
+        });
+    }
+
+    deleteMsg = () => {
+        socket.emit('delete_msg', {
+            id_msg: 1,
+            id_room: 1
+        })
+    }
+
+    socket.on('new_msg', function (data) {
+        console.log(`new message from user ${data.id_user}`);
+        // add list item
+    })
+
+    socket.on('event', function (data) {
+        console.log(data);
+    });
+    
+    socket.on('disconnect', function () {});
+</script>
+</html>
