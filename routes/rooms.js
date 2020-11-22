@@ -28,13 +28,10 @@ router.post("/createRoom", ProtectedRoutes, [
                     message: "Room already exists"
                 });
             }
-            
-            let last = Room.find().sort({ _id: -1 });
 
             room = new Room({
                 name,
-                id_user,
-                last
+                id_user
             })
 
             await room.save();
