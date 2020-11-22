@@ -62,7 +62,7 @@ router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
     let messages = Message.find({id_room: req.body.id_room});
 
-    if (!message) return res.status(400).json({message: "There is no messages in this room"});
+    if (!messages) return res.status(400).json({message: "There is no messages in this room"});
 
     messages.forEach(element => {
         let user = User.find({id_user: element.id_user});
