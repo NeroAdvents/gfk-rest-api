@@ -8,6 +8,10 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "15.2.0",
+    "npm": "7.0.8"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
