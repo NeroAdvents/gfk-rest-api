@@ -64,8 +64,8 @@ router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
     if (!messages) return res.status(400).json({message: "There is no messages in this room"});
 
-    Object.keys(messages).forEach(([key, value]) => {
-        console.log(`key: ${key} and value: ${value[key]}`);
+    Object.keys(messages).forEach((key) => {
+        console.log(`key: ${key}`);
     })
 
     /*messages.forEach(element => {
