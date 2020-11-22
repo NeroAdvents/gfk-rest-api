@@ -20,14 +20,16 @@ router.post("/createMessage",
             })
         }
 
-        const {message, id_room} = req.body;
+        const {message, id_room, username, avatar} = req.body;
         const id_user = req.decoded.user.id_user;
 
         try {
             msg = new Message({
                 message,
                 id_user,
-                id_room
+                id_room,
+                username,
+                avatar
             });
 
             await msg.save();
