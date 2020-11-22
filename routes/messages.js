@@ -60,25 +60,7 @@ router.delete("/deleteMessage", ProtectedRoutes, (req, res) => {
 
 router.post("/getMessages", ProtectedRoutes, (req, res) => {
 
-    Message.find({id_room: req.body.id_room})
-    .exec( async (err, messages) => {
-        if (err) return res.status(400).json({message: "Error while getting messages", error: err});
-
-        res.status(200).json({messages});
-    })
-
-    /*messages.forEach(element => {
-        let user = User.find({id_user: element.id_user});
-        list.append({
-            id_user: element.id_user,
-            message: element.message,
-            username: user.username,
-            avatar: user.avatar
-        })
-    });*/
-
-
-    /*Message.find({id_room: req.body.id_roomn})
+    Message.find({id_room: req.body.id_roomn})
     .exec((err, messages) => {
         if (err) {
             return res.status(400).json({
@@ -89,7 +71,7 @@ router.post("/getMessages", ProtectedRoutes, (req, res) => {
         res.status(200).json({
             messages: messages
         })
-    })*/
+    })
 });
 
 module.exports = router;
