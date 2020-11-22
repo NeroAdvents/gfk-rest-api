@@ -19,7 +19,8 @@ router.post("/createMessage",
             })
         }
 
-        const {message, id_user, id_room} = req.body;
+        const {message, id_room} = req.body;
+        const id_user = req.decoded.user.id_user;
 
         try {
             msg = new Message({
@@ -39,8 +40,9 @@ router.post("/createMessage",
 });
 
 router.delete("/deleteMessage", ProtectedRoutes, (req, res) => {
+    const id_user = req.decoded.user.id_user;
 
-    Message.findOneAndDelete({id_message: req.body.id_message})
+    Message.findOneAndDelete({id_message: req.body.id_message, id_user: id_user})
     .exec((err, message) => {
         if (err) {
             console.log(err);
