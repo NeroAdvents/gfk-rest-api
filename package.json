@@ -4,7 +4,7 @@
   "description": "api rest for gfk react native project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm install && node index.js"
   },
   "author": "",
   "license": "ISC",
