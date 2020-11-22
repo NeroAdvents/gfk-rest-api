@@ -55,7 +55,7 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(upload);
 app.use(cors());
-app.use(express.static(__dirname + '/upload/'));
+app.use(express.static(__dirname + '/uploads/'));
 
 app.use('/user', user);
 app.use('/room', room);
@@ -63,8 +63,8 @@ app.use('/message', message);
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 app.get("/", (req, res) => {
-    //res.json({ message: "API Working" });
-    res.sendFile(__dirname + '/index.html');
+    res.json({ message: "API Working" });
+    //res.sendFile(__dirname + '/index.html');
 });
 
 http.listen(port, () => {
