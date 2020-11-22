@@ -55,7 +55,7 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(upload);
 app.use(cors());
-app.use(express.static(__dirname + '/uploads/'));
+app.use('/uploads', express.static('uploads'));
 
 app.use('/user', user);
 app.use('/room', room);
