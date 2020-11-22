@@ -16,7 +16,8 @@ router.post("/createRoom", ProtectedRoutes, [
             });
         }
 
-        const {name, id_user} = req.body;
+        const {name} = req.body;
+        const id_user = req.decoded.user.id_user;
 
         try {
             let room = await Room.findOne({
@@ -43,7 +44,10 @@ router.post("/createRoom", ProtectedRoutes, [
 });
 
 router.delete("/deleteRoom", ProtectedRoutes, (req, res) => {
-    Room.findOneAndDelete({id_room: req.body.id_room})
+
+    const id_user = req.decoded.user.id_user;
+
+    Room.findOneAndDelete({id_room: req.body.id_room, id_user: id_user})
     .exec((err, message) => {
         if (err) return res.status(400).json({message: 'There are an error deleting the message', error: err});
         res.status(200).json({message: 'Room deleted successfully', deletedRoom: message});
